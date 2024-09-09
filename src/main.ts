@@ -17,7 +17,7 @@ const controls = {
   color: [90, 200, 230], // default color
   alpha: 1.0,
   shader: 'worley',
-  worley: 0.5,
+  worley: 5,
 };
 
 let icosphere: Icosphere;
