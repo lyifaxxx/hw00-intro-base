@@ -19,6 +19,8 @@ uniform mat4 u_ViewProj;    // The matrix that defines the camera's transformati
                             // We've written a static matrix for you to use for HW2,
                             // but in HW3 you'll have to generate one yourself
 
+uniform float u_Time;
+
 in vec4 vs_Pos;             // The array of vertex positions passed to the shader
 
 in vec4 vs_Nor;             // The array of vertex normals passed to the shader
@@ -36,7 +38,7 @@ const vec4 lightPos = vec4(5, 5, 3, 1); //The position of our virtual light, whi
 void main()
 {
     fs_Col = vs_Col;                         // Pass the vertex colors to the fragment shader for interpolation
-    fs_Pos = vs_Pos;                         // Pass the vertex positions to the fragment shader for interpolation
+
     mat3 invTranspose = mat3(u_ModelInvTr);
     fs_Nor = vec4(invTranspose * vec3(vs_Nor), 0);          // Pass the vertex normals to the fragment shader for interpolation.
                                                             // Transform the geometry's normals by the inverse transpose of the
@@ -44,11 +46,25 @@ void main()
                                                             // perpendicular to the surface after the surface is transformed by
                                                             // the model matrix.
 
-
+    fs_Nor = normalize(fs_Nor);             // Normalize the normals to ensure they have a length of 1.
     vec4 modelposition = u_Model * vs_Pos;   // Temporarily store the transformed vertex positions for use below
 
     fs_LightVec = lightPos - modelposition;  // Compute the direction in which the light source lies
+    // set a rotation matrix to rotate the object
+    mat4 rotate = mat4(cos(u_Time), -sin(u_Time), 0, 0,
+                        sin(u_Time), cos(u_Time), 0, 0,
+                        0, 0, 1, 0,
+                        0, 0, 0, 1);
+    float t = u_Time * 1.0;
+    t = smoothstep(0.0, 0.7, cos(t) * 0.5 + 0.5);
+    /////////////////////////////////////////                    
+    // make the object collapes into a shpere
+    vec4 newPos = mix(vs_Pos, vec4(normalize(vs_Pos.xyz), 1.0), t * t);
+    modelposition = u_Model * newPos;
+    gl_Position = rotate * u_ViewProj * modelposition + sin(0.5 * u_Time + 0.5);
+    /////////////////////////////////////////
 
-    gl_Position = u_ViewProj * modelposition;// gl_Position is a built-in variable of OpenGL which is
+    //gl_Position = rotate * u_ViewProj * modelposition + sin(u_Time);// gl_Position is a built-in variable of OpenGL which is
                                              // used to render the final positions of the geometry's vertices
+    fs_Pos = modelposition + sin(u_Time + 0.5);           // Pass the vertex positions to the fragment shader for interpolation
 }
