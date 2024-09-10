@@ -56,7 +56,7 @@ void main()
     vec3 p = vec3(fs_Pos);
     p = sin(p * 0.2);
     float d = worley(p * u_WorleyScale);
-    float noiseEffect = clamp(d / 3.0, 0.0, 1.0);
+    float noiseEffect = clamp(d, 0.0, 1.0);
     noiseEffect = smoothstep(0.1, 0.5, noiseEffect);
     vec4 diffuseColor = u_Color;
     vec4 ambientColor = vec4(0.2, 0.2, 0.2, 1.0);
