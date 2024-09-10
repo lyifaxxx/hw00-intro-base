@@ -5,7 +5,24 @@
 </p>
 <p align="center">(source: Ken Perlin)</p>
 
+## Live Demo Link
+
+[Click to view the live demo](https://lyifaxxx.github.io/hw00-intro-base/)
+
+
 ## Project Outputs
+
+![](image/result.gif)
+
+## Project Features
+
+- custom vertex shader to deform the shape of the cube
+- custom fragment shader to shade the object with worley noise patterns
+- GUI
+  - a palette to change the diffuse color of rendered object
+  - scroll to toogle the alpha value of the object's diffuse color
+  - a selector to choose from different fragment shaders
+
 
 ## Objective
 
