@@ -5,11 +5,14 @@
 </p>
 <p align="center">(source: Ken Perlin)</p>
 
+## Project Outputs
+
 ## Objective
 
 - Check that the tools and build configuration we will be using for the class works.
 - Start learning Typescript and WebGL2
 - Practice implementing noise
+
 
 ## Forking the Code
 Rather than cloning the homework repository, please __fork__ the code into your own repository using the `Fork` button in the upper-right hand corner of the Github UI. This will enable you to have your own personal repository copy of the code, and let you make a live demo (described later in this document).

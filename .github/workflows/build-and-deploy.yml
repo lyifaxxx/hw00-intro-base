@@ -22,7 +22,7 @@ jobs:
           path: ~/.npm
           key: ${{ runner.os }}-build-${{ hashFiles('**/package-lock.json') }}
 
-      - name: Install and Build 🔧
+      - name: Install and Build  🔧
         run: |
           npm ci
           export NODE_ENV=production
